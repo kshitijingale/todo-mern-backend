@@ -4,8 +4,8 @@ const app = express();
 require('./config/db').connect();
 
 // Middleware
-app.set(express.json())
-app.set(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 
 app.use('/', routes)
