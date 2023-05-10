@@ -1,16 +1,24 @@
 const express = require('express')
 const router = express.Router();
 const { home } = require('../controllers/home')
-const { createTodos } = require('../controllers/createTodos')
+const { createTodo } = require('../controllers/createTodo')
 const { getTodos } = require('../controllers/getTodos');
-const { deleteTodos } = require('../controllers/deleteTodos');
-const { editTodos } = require('../controllers/editTodos');
+const { deleteTodo } = require('../controllers/deleteTodo');
+const { editTodo } = require('../controllers/editTodo');
+const { createTodoTask } = require('../controllers/createTodoTask');
+const { getTodoTasks } = require('../controllers/getTodoTasks');
+const { deleteTodoTask } = require('../controllers/deleteTodoTask');
+const { editTodoTask } = require('../controllers/editTodoTask');
 
 // Path
 router.get('/', home)
-router.post('/createTodos', createTodos)
+router.post('/createTodo', createTodo)
 router.get('/getTodos', getTodos)
-router.put('/editTodos/:id', editTodos)
-router.delete('/deleteTodos/:id', deleteTodos)
+router.put('/editTodo/:id', editTodo)
+router.delete('/deleteTodo/:id', deleteTodo)
+router.post('/createTodoTask/:id', createTodoTask)
+router.get('/getTodoTasks/:id', getTodoTasks)
+router.delete('/deleteTodoTask/:id', deleteTodoTask)
+router.put('/editTodoTask/:id', editTodoTask)
 
 module.exports = router;

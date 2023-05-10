@@ -1,18 +1,17 @@
-const Todo = require('../model/todo')
+const Todo = require('../model/Todo')
 
-exports.createTodos = async (req, res) => {
-    console.log(req.body);
+exports.createTodo = async (req, res) => {
     try {
-        const { title, tasks } = req.body;
+        const { title } = req.body;
 
         const todos = await Todo.create({
             title,
-            tasks
         })
         res.status(200).json({
             success: true,
             todos
         })
+
     } catch (error) {
         console.log(error.message);
         res.status(400).json({

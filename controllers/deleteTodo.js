@@ -1,14 +1,16 @@
-const Todo = require('../model/todo')
+const Todo = require('../model/Todo')
 
-exports.editTodos = async (req, res) => {
+exports.deleteTodo = async (req, res) => {
     try {
-        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body)
+        const id = req.params.id;
+        const todo = await Todo.findByIdAndDelete(id)
 
         res.status(200).json({
             success: true,
             todo,
-            message: "Todo updated successfully"
+            message: "Todo deleted successfully"
         })
+
     } catch (error) {
         console.log(error.message);
         res.status(400).json({
