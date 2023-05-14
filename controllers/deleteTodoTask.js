@@ -2,6 +2,7 @@ const Todo = require("../model/Todo");
 
 exports.deleteTodoTask = async (req, res) => {
     try {
+
         const taskIndex = req.body.taskIndex;
         const todoId = req.params.id;
         const todo = await Todo.findById(todoId)

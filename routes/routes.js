@@ -18,7 +18,7 @@ router.put('/editTodo/:id', editTodo)
 router.delete('/deleteTodo/:id', deleteTodo)
 router.post('/createTodoTask/:id', createTodoTask)
 router.get('/getTodoTasks/:id', getTodoTasks)
-router.delete('/deleteTodoTask/:id', deleteTodoTask)
+router.put('/deleteTodoTask/:id', deleteTodoTask)
 router.put('/editTodoTask/:id', editTodoTask)
 
 module.exports = router;

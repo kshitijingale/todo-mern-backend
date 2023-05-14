@@ -3,6 +3,7 @@ const Todo = require('../model/Todo')
 exports.editTodo = async (req, res) => {
     try {
         let todo = req.body;
+        console.log(todo);
         todo.modifiedDate = Date.now();
         await Todo.findByIdAndUpdate(req.params.id, todo)
 
