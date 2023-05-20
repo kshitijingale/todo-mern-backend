@@ -11,5 +11,6 @@ const todoSchema = new mongoose.Schema({
         type: Date
     }
 })
+todoSchema.index({ '$**': 'text' })
 
 module.exports = mongoose.model("Todo", todoSchema);

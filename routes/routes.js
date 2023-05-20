@@ -9,6 +9,7 @@ const { createTodoTask } = require('../controllers/createTodoTask');
 const { getTodoTasks } = require('../controllers/getTodoTasks');
 const { deleteTodoTask } = require('../controllers/deleteTodoTask');
 const { editTodoTask } = require('../controllers/editTodoTask');
+const { searchTodos } = require('../controllers/searchTodos');
 
 // Path
 router.get('/', home)
@@ -20,5 +21,6 @@ router.post('/createTodoTask/:id', createTodoTask)
 router.get('/getTodoTasks/:id', getTodoTasks)
 router.put('/deleteTodoTask/:id', deleteTodoTask)
 router.put('/editTodoTask/:id', editTodoTask)
+router.post('/api/searchTodos/:text', searchTodos);
 
 module.exports = router;
