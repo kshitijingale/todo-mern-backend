@@ -1,4 +1,4 @@
-const Todo = require("../model/Todo");
+const User = require("../model/User");
 
 exports.createTodoTask = async (req, res) => {
     try {
@@ -12,10 +12,11 @@ exports.createTodoTask = async (req, res) => {
             })
         }
         else {
-            const todoId = req.params.id;
-            const todo = await Todo.findById(todoId)
+            const user = await User.findById(req.user.id)
+            const index = user.todos.findIndex(x => x._id.toString() === req.params.id);
+            const todo = user.todos[index];
             todo.tasks.push(task)
-            await todo.save();
+            await user.save();
 
             res.status(200).json({
                 sucess: true,

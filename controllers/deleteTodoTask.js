@@ -1,13 +1,13 @@
-const Todo = require("../model/Todo");
+const User = require("../model/User");
 
 exports.deleteTodoTask = async (req, res) => {
     try {
-
+        const user = await User.findById(req.user.id)
+        const index = user.todos.findIndex(x => x._id.toString() === req.params.id);
+        const todo = user.todos[index];
         const taskIndex = req.body.taskIndex;
-        const todoId = req.params.id;
-        const todo = await Todo.findById(todoId)
         todo.tasks.splice(taskIndex, 1)
-        await todo.save();
+        await user.save();
 
         res.status(200).json({
             sucess: true,

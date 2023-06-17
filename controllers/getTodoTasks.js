@@ -1,9 +1,11 @@
-const Todo = require("../model/Todo");
+
+const User = require("../model/User");
 
 exports.getTodoTasks = async (req, res) => {
     try {
-        const todoId = req.params.id;
-        const todo = await Todo.findById(todoId);
+        const user = await User.findById(req.user.id)
+        const index = user.todos.findIndex(x => x._id.toString() === req.params.id);
+        const todo = user.todos[index];
 
         const tasks = todo.tasks;
 

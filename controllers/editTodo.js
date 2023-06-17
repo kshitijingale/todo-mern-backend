@@ -1,14 +1,27 @@
-const Todo = require('../model/Todo')
+const User = require('../model/User');
 
 exports.editTodo = async (req, res) => {
     try {
-        let todo = req.body;
-        todo.modifiedDate = Date.now();
-        await Todo.findByIdAndUpdate(req.params.id, todo)
+        const user = await User.findById(req.user.id)
+        const { title } = req.body;
+        const index = user.todos.findIndex(x => x._id.toString() === req.params.id);
+        // If Todo not found
+        if (index === -1) {
+            res.status(401).json({
+                success: false,
+                message: "Todo not found"
+            })
+        }
+        user.todos[index] = {
+            title,
+            modifiedDate: Date.now()
+        }
+
+        await user.save();
 
         res.status(200).json({
             success: true,
-            todo,
+            user,
             message: "Todo updated successfully"
         })
     } catch (error) {

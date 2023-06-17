@@ -1,9 +1,15 @@
-const Todo = require('../model/Todo')
+const User = require('../model/User');
 
 exports.searchTodos = async (req, res) => {
     try {
-        const searchText = req.params.text;
-        const todos = await Todo.find({ $text: { $search: `${searchText}` } });
+        const user = await User.findById(req.user.id)
+        const searchText = req.params.text.toLowerCase();
+        const todos = user.todos.filter((todo) => {
+            const todoTitle = todo.title.toLowerCase();
+            if (todoTitle.includes(searchText)) {
+                return todo;
+            }
+        })
 
         res.status(200).json({
             success: true,
@@ -12,5 +18,4 @@ exports.searchTodos = async (req, res) => {
     } catch (error) {
         console.log(error.message);
     }
-
 }

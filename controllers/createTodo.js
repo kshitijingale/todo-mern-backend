@@ -1,15 +1,20 @@
-const Todo = require('../model/Todo')
+const User = require('../model/User');
 
 exports.createTodo = async (req, res) => {
     try {
         const { title } = req.body;
+        const user = await User.findById(req.user.id)
 
-        const todos = await Todo.create({
+
+        user.todos.push({
             title,
-        })
+        });
+
+        await user.save();
+
         res.status(200).json({
             success: true,
-            todos
+            user
         })
 
     } catch (error) {

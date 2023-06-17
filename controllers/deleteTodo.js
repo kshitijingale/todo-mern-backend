@@ -1,13 +1,22 @@
-const Todo = require('../model/Todo')
+const User = require("../model/User");
 
 exports.deleteTodo = async (req, res) => {
     try {
-        const id = req.params.id;
-        const todo = await Todo.findByIdAndDelete(id)
+        const user = await User.findById(req.user.id)
+        const index = user.todos.findIndex(x => x._id.toString() === req.params.id);
+        user.todos.splice(index, 1)
+        // If Todo not found
+        if (index === -1) {
+            res.status(401).json({
+                success: false,
+                message: "Todo not found"
+            })
+        }
 
+        await user.save();
         res.status(200).json({
             success: true,
-            todo,
+            user,
             message: "Todo deleted successfully"
         })
 

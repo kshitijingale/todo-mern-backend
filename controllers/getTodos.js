@@ -1,9 +1,10 @@
-const Todo = require('../model/Todo')
+const Todo = require('../model/Todo');
+const User = require('../model/User');
 
 exports.getTodos = async (req, res) => {
     try {
-        const todos = await Todo.find();
-
+        const user = await User.findById(req.user.id);
+        const todos = user.todos;
         res.status(200).json({
             success: true,
             todos
