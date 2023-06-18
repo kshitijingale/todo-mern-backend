@@ -15,6 +15,7 @@ const { editTodoTask } = require('../controllers/editTodoTask');
 const { searchTodos } = require('../controllers/searchTodos');
 const { register } = require('../controllers/register');
 const { login } = require('../controllers/login');
+const { logout } = require('../controllers/logout');
 
 // Path
 router.get('/', home)
@@ -29,5 +30,6 @@ router.put('/editTodoTask/:id', auth, editTodoTask)
 router.post('/api/searchTodos/:text', auth, searchTodos)
 router.post('/api/register', register)
 router.post('/api/login', login)
+router.get('/logout', logout)
 
 module.exports = router;

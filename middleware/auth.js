@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const auth = (req, res, next) => {
     const { token } = req.cookies
 
-    // Check if token exist
+    // Check if token doesn't exist
     if (!token) {
         return res.status(401).send('Access Denied');
     }
@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
         req.user = decode;
 
     } catch (error) {
-        console.error(`Auth route :: ${error}`);
+        console.error(`Auth middleware :: ${error}`);
         // Invalid token
         return res.status(401).send(error.message)
     }
