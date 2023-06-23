@@ -16,7 +16,10 @@ exports.login = async (req, res) => {
 
         // if user does not exist
         if (!user) {
-            res.status(401).send('User does not exist')
+            return res.status(401).json({
+                success: false,
+                message: "User does not exist"
+            })
         }
 
         // match the password
@@ -36,9 +39,16 @@ exports.login = async (req, res) => {
                 token
             })
         }
-        res.status(400).send('email and password are incorrect')
+        return res.status(400).json({
+            success: false,
+            message: "Email or Password is incorrect"
+        })
 
     } catch (error) {
         console.log(`Error :: login route :: ${error}`);
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }

@@ -30,6 +30,6 @@ router.put('/editTodoTask/:id', auth, editTodoTask)
 router.post('/api/searchTodos/:text', auth, searchTodos)
 router.post('/api/register', register)
 router.post('/api/login', login)
-router.get('/logout', logout)
+router.get('/api/logout', logout)
 
 module.exports = router;

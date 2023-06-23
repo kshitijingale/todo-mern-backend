@@ -8,18 +8,27 @@ exports.register = async (req, res) => {
 
         // Validate data if exist
         if (!(name && email && password)) {
-            return res.status(401).send('All fields are required')
+            return res.status(401).json({
+                success: false,
+                message: "All fields are required"
+            })
         }
 
         // Check user already exist or not
         const doesExist = await User.findOne({ email })
         if (doesExist) {
-            return res.status(401).send('User already exists')
+            return res.status(401).json({
+                success: false,
+                message: "User already exists"
+            })
         }
 
         //check if email is in correct format
         if (!(validateEmail(email))) {
-            return res.status(401).send('Email is not valid')
+            return res.status(401).json({
+                success: false,
+                message: "Invalid Email"
+            })
         }
 
         // encrypt password
@@ -42,7 +51,7 @@ exports.register = async (req, res) => {
             httpOnly: true
         }
 
-        res.status(200).cookie('token', token, cookieOptions).json({
+        return res.status(200).cookie('token', token, cookieOptions).json({
             success: true,
             user,
             token
@@ -50,6 +59,10 @@ exports.register = async (req, res) => {
 
     } catch (error) {
         console.log(`Error :: register route :: ${error}`);
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }
 

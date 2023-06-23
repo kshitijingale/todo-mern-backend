@@ -4,12 +4,12 @@ exports.logout = (req, res) => {
             expires: new Date(Date.now()),
             httpOnly: true
         })
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Logout success"
         })
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             message: error.message
         })

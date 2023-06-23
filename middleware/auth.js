@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
     const { token } = req.cookies
-
     // Check if token doesn't exist
     if (!token) {
         return res.status(401).send('Access Denied');
